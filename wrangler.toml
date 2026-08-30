@@ -1,0 +1,23 @@
+name = "ryku-hunt"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-01-01"
+
+# ── Production D1 binding ───────────────────────────────────────────
+# Create the database once:
+#   npx wrangler d1 create dragon-hunt-leaderboard
+# Then replace the database_id below with the UUID printed by that command.
+# Apply migrations:
+#   npx wrangler d1 migrations apply dragon-hunt-leaderboard --remote
+
+[[d1_databases]]
+binding = "DB"
+database_name = "dragon-hunt-leaderboard"
+database_id = ""
+
+# ── Preview / branch-deploy D1 binding (optional) ──────────────────
+# Uncomment and set a separate preview database_id if desired.
+# [env.preview]
+# [[env.preview.d1_databases]]
+# binding = "DB"
+# database_name = "dragon-hunt-leaderboard-preview"
+# database_id = ""

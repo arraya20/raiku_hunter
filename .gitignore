@@ -1,0 +1,10 @@
+node_modules/
+dist/
+test-results/
+.wrangler/
+.dev.vars
+.DS_Store
+.idea/
+.codex/
+.learnings/
+

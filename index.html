@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#07110e">
+    <meta name="description" content="Ryku Hunt — a fast jungle target challenge with original characters.">
+    <title>Ryku Hunt</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="ambient ambient-a" aria-hidden="true"></div>
+    <div class="ambient ambient-b" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <button class="brand" type="button" data-action="home" aria-label="Ryku Hunt home">
+        <span class="brand-glyph" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>RYKU <b>HUNT</b></span>
+      </button>
+      <span class="signal"><i></i> JUNGLE SIGNAL / LIVE</span>
+      <div class="top-actions">
+        <span class="operator" id="operator-badge" hidden>HUNTER <b id="operator-name"></b></span>
+        <button class="icon-button" type="button" data-action="sound" aria-label="Mute sound">♪</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="screen home-screen is-active" data-screen="home">
+        <div class="hero-copy">
+          <p class="eyebrow"><span>NEW TRANSMISSION</span> CANOPY SECTOR 07</p>
+          <h1>Eyes up.<br><em>Ryku is coming!</em></h1>
+          <p class="hero-lead">Track the jungle signal. Three rounds in the chamber. Ten targets between you and the next sector.</p>
+
+          <form id="identity-form" class="identity-form" novalidate>
+            <label for="username">HUNTER USERNAME</label>
+            <div class="input-row">
+              <input id="username" name="username" type="text" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" autocomplete="username" spellcheck="false" aria-describedby="username-error">
+              <button type="button" data-action="randomize" aria-label="Generate a random username">↻</button>
+            </div>
+            <small id="username-error" class="field-error" role="alert"></small>
+          </form>
+
+          <div class="hero-stats" aria-label="Game summary">
+            <div><small>TARGETS</small><strong>10</strong><span>PER ROUND</span></div>
+            <div><small>MAGAZINE</small><strong>03</strong><span>PER WAVE</span></div>
+            <div><small>INPUT</small><strong>3×</strong><span>TOUCH / MOUSE / KEY</span></div>
+          </div>
+        </div>
+
+        <div class="mode-zone" aria-labelledby="mode-title">
+          <div class="section-heading">
+            <div><p class="eyebrow"><span>SELECT</span> MISSION PROTOCOL</p><h2 id="mode-title">Choose your hunt</h2></div>
+            <button class="text-button" type="button" data-action="leaderboard">VIEW LEADERBOARD <span>↗</span></button>
+          </div>
+          <div class="mode-grid">
+            <button class="mode-card mode-a" type="button" data-mode="A">
+              <span class="mode-code">GAME A</span>
+              <span class="mode-visual" aria-hidden="true"><img src="assets/ryku/ryku-game.png" alt=""></span>
+              <strong>SOLO FLIGHT</strong>
+              <span>One Ryku at a time.<br>Precision before speed.</span>
+              <small>10 WAVES · 1 TARGET</small>
+            </button>
+            <button class="mode-card mode-b" type="button" data-mode="B">
+              <span class="mode-code">GAME B</span>
+              <span class="mode-visual twin" aria-hidden="true"><img src="assets/ryku/ryku-game.png" alt=""><img src="assets/ryku/ryku-game.png" alt=""></span>
+              <strong>DUAL SIGNAL</strong>
+              <span>Two Ryku targets break cover.<br>React faster.</span>
+              <small>5 WAVES · 2 TARGETS</small>
+            </button>
+          </div>
+        </div>
+
+        <aside class="home-ranking panel">
+          <div class="panel-heading"><span>TOP HUNTERS</span><small id="home-ranking-status">DEMO · OFFLINE</small></div>
+          <ol id="home-ranking" class="ranking-list"></ol>
+        </aside>
+      </section>
+
+      <section class="screen briefing-screen" data-screen="briefing" aria-labelledby="briefing-title">
+        <div class="briefing-art" aria-hidden="true">
+          <div class="radar-ring"></div>
+          <img src="assets/ryku/ryku-game.png" alt="">
+          <span>LOCK ACQUIRED</span>
+        </div>
+        <div class="briefing-card panel">
+          <p class="eyebrow"><span id="briefing-mode">GAME A</span> PROTOCOL READY</p>
+          <h2 id="briefing-title">Solo Flight</h2>
+          <p id="briefing-copy">One signal at a time. Make every round count.</p>
+          <div class="briefing-rules">
+            <div><small>TARGETS</small><strong>10</strong></div>
+            <div><small>PASS MARK</small><strong id="briefing-pass">06</strong></div>
+            <div><small>ROUNDS</small><strong>10 MAX</strong></div>
+          </div>
+          <button class="primary-button" type="button" data-action="start">ENTER THE GAME <span>→</span></button>
+          <button class="text-button centered" type="button" data-action="home">RETURN HOME</button>
+        </div>
+      </section>
+
+      <section class="screen game-screen" data-screen="game" aria-label="Ryku Hunt game">
+        <aside class="mission-panel panel">
+          <div class="panel-heading"><span>ACTIVE RYKU HUNT</span><small id="hud-mode">GAME A</small></div>
+          <div class="round-lock"><small>ROUND</small><strong id="round-number">01</strong><span>/10</span></div>
+          <div class="target-progress"><span>HITS REQUIRED</span><strong><b id="round-hits">0</b> / <span id="round-pass">6</span></strong><i><b id="hit-progress"></b></i></div>
+          <div class="mission-tip"><span>⌖</span><p><strong>AIM + FIRE</strong><br>Click, tap, or press Space.<br>P / Esc to pause.</p></div>
+        </aside>
+
+        <div class="arena-column">
+          <div class="arena-hud">
+            <div><small>WAVE</small><strong><span id="wave-number">01</span>/<span id="wave-total">10</span></strong></div>
+            <div class="timer"><span>EXPOSURE</span><i><b id="wave-timer"></b></i></div>
+            <div class="ammo" aria-label="Three bullets remaining"><small>AMMO</small><span id="ammo-display"></span></div>
+          </div>
+          <div class="canvas-frame" id="canvas-frame">
+            <canvas id="game-canvas" role="application" aria-label="Ryku hunting arena. Use pointer or keyboard to aim and fire." width="960" height="600" tabindex="0"></canvas>
+            <div class="frame-corners" aria-hidden="true"></div>
+            <div class="wave-callout" id="wave-callout" hidden></div>
+            <div class="companion-event" id="companion-event" hidden>
+              <img src="assets/companion/jungle-scout-placeholder.svg" alt="Jungle scout companion">
+              <strong id="companion-message">SIGNAL SECURED!</strong>
+            </div>
+            <div class="pause-overlay" id="pause-overlay" hidden><span>TRANSMISSION PAUSED</span><small>Press P, Escape, or Resume</small><button type="button" data-action="pause">RESUME</button></div>
+          </div>
+        </div>
+
+        <aside class="score-panel panel">
+          <div class="score-block"><small>RUN SCORE</small><strong id="score">000000</strong></div>
+          <div class="combo-block"><small>CHAIN</small><strong id="combo">× 0</strong></div>
+          <div class="accuracy-block"><small>ACCURACY</small><strong id="accuracy">—</strong></div>
+          <button class="icon-button pause-button" type="button" data-action="pause" aria-label="Pause game">Ⅱ</button>
+        </aside>
+      </section>
+
+      <section class="screen result-screen" data-screen="round-result" aria-labelledby="result-title">
+        <div class="result-card panel">
+          <div class="result-mark">✓</div>
+          <p class="eyebrow"><span>SECTOR CLEAR</span> SIGNAL STABLE</p>
+          <h2 id="result-title">Round <span id="result-round">01</span> complete</h2>
+          <p>You reached the required signal count. The next canopy moves faster.</p>
+          <div class="result-score"><small>RUN SCORE</small><strong id="result-score">0</strong></div>
+          <div class="result-grid"><div><span>HITS</span><strong id="result-hits">0/10</strong></div><div><span>ACCURACY</span><strong id="result-accuracy">0%</strong></div><div><span>BEST CHAIN</span><strong id="result-combo">×0</strong></div></div>
+          <button class="primary-button" type="button" data-action="continue">NEXT ROUND <span>→</span></button>
+        </div>
+      </section>
+
+      <section class="screen result-screen" data-screen="gameover" aria-labelledby="gameover-title">
+        <div class="result-card danger panel">
+          <div class="result-mark">×</div>
+          <p class="eyebrow"><span>RUN ENDED</span> SIGNAL LOST</p>
+          <h2 id="gameover-title">The canopy went quiet.</h2>
+          <p id="gameover-copy">Recalibrate your aim and return to the hunt.</p>
+          <div class="result-score"><small>FINAL SCORE</small><strong id="final-score">0</strong></div>
+          <div class="result-grid"><div><span>ROUND</span><strong id="final-round">01</strong></div><div><span>TOTAL HITS</span><strong id="final-hits">0</strong></div><div><span>ACCURACY</span><strong id="final-accuracy">0%</strong></div></div>
+          <p class="submission-status" id="submission-status" aria-live="polite"></p>
+          <button class="primary-button" type="button" data-action="retry">RUN IT AGAIN <span>↻</span></button>
+          <button class="text-button centered" type="button" data-action="leaderboard">VIEW LEADERBOARD</button>
+        </div>
+      </section>
+
+      <section class="screen leaderboard-screen" data-screen="leaderboard" aria-labelledby="leaderboard-title">
+        <div class="leaderboard-card panel">
+          <div class="leaderboard-header"><div><p class="eyebrow"><span>VERIFIED</span> JUNGLE NETWORK</p><h2 id="leaderboard-title">Top Hunters</h2><p id="leaderboard-status">DEMO · OFFLINE</p></div><button class="icon-button" type="button" data-action="home" aria-label="Close leaderboard">×</button></div>
+          <div class="filter-row"><div class="tabs" role="tablist" aria-label="Game mode"><button class="is-active" type="button" data-filter-mode="A">GAME A</button><button type="button" data-filter-mode="B">GAME B</button></div><div class="tabs" role="tablist" aria-label="Leaderboard period"><button class="is-active" type="button" data-filter-period="daily">DAILY</button><button type="button" data-filter-period="allTime">ALL TIME</button></div></div>
+          <ol id="full-ranking" class="ranking-list full-ranking"></ol>
+        </div>
+      </section>
+    </main>
+
+    <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <footer><span>RYKU HUNT / ORIGINAL COMMUNITY GAME</span><span>BUILD 0.1.0</span></footer>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

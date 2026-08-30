@@ -1,0 +1,28 @@
+{
+  "name": "ryku-hunt",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build": "node scripts/build-pages.mjs",
+    "test": "node --test",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "node scripts/lint.mjs",
+    "lint:css": "stylelint \"styles.css\"",
+    "test:e2e": "node tests/browser-smoke.mjs",
+    "serve": "python3 -m http.server 4192",
+    "dev": "npx wrangler pages dev dist --d1 DB=dragon-hunt-leaderboard",
+    "db:migrate:local": "npx wrangler d1 migrations apply dragon-hunt-leaderboard --local",
+    "db:migrate:remote": "npx wrangler d1 migrations apply dragon-hunt-leaderboard --remote",
+    "deploy": "npm run build && npx wrangler pages deploy dist"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0",
+    "wrangler": "^4.127.1"
+  }
+}

@@ -1,0 +1,4 @@
+# Copy this file to .dev.vars (which is git-ignored) and fill in a
+# development-only signing secret (at least 32 characters).
+# NEVER use the production secret here.
+RUN_SIGNING_SECRET=replace-with-at-least-32-random-characters
