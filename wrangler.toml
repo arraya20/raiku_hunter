@@ -2,6 +2,11 @@ name = "ryku-hunt"
 pages_build_output_dir = "dist"
 compatibility_date = "2025-01-01"
 
+[[d1_databases]]
+binding = "DB"
+database_name = "dragon-hunt-leaderboard"
+database_id = "b3298eaf-9743-44d8-a078-cc2d4c518d51"
+
 # ── D1 binding ──────────────────────────────────────────────────────
 # When deploying via Cloudflare Pages dashboard, configure the D1
 # binding in Workers & Pages → Settings → Bindings (variable name: DB).
