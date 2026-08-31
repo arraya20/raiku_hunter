@@ -139,8 +139,8 @@ function rankingItem(entry, index) {
   return item;
 }
 
-export function renderRankings(entries = DEMO_RANKINGS, { live = false } = {}) {
-  const rows = entries.length ? entries : DEMO_RANKINGS;
+export function renderRankings(entries = [], { live = false } = {}) {
+  const rows = Array.isArray(entries) && entries.length ? entries : live ? [] : DEMO_RANKINGS;
   $("#home-ranking").replaceChildren(...rows.slice(0, 5).map(rankingItem));
   $("#full-ranking").replaceChildren(...rows.map(rankingItem));
   $("#home-ranking-status").textContent = live ? "LIVE · VERIFIED" : "DEMO · OFFLINE";

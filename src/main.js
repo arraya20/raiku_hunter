@@ -342,5 +342,6 @@ feedback.setEnabled(readPreference("sound", "true") !== "false");
 $("[data-action='sound']").textContent = feedback.enabled ? "♪" : "×";
 $("#username").value = username || createRandomUsername();
 updateUsernameField();
-renderRankings();
+updateFilters({ mode: leaderboardMode, period: leaderboardPeriod });
+loadLeaderboard();
 requestAnimationFrame((time) => { previousFrame = time; animate(time); });
