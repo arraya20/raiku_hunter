@@ -206,7 +206,8 @@ export async function handleStartRun({
 }) {
   const db = requireDatabase(env);
   const secret = requireSigningSecret(env);
-  if (!db || !secret) return apiError(503, "SERVICE_UNAVAILABLE", "Verified runs unavailable");
+  if (!db) return apiError(503, "DB_MISSING", "DB binding unavailable");
+  if (!secret) return apiError(503, "SECRET_MISSING", "RUN_SIGNING_SECRET unavailable");
   const body = await readJsonBody(request);
   if (body.error) return body.error;
   const fields = new Set(["mode"]);
@@ -246,7 +247,8 @@ export async function handleSubmitRun({
 }) {
   const db = requireDatabase(env);
   const secret = requireSigningSecret(env);
-  if (!db || !secret) return apiError(503, "SERVICE_UNAVAILABLE", "Leaderboard service unavailable");
+  if (!db) return apiError(503, "DB_MISSING", "DB binding unavailable");
+  if (!secret) return apiError(503, "SECRET_MISSING", "RUN_SIGNING_SECRET unavailable");
   const body = await readJsonBody(request);
   if (body.error) return body.error;
   const validation = validateRunPayload(body.data);
